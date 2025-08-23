@@ -8,3 +8,4 @@ Route::get('/', function () {
 });
 
 Route::get('/job',[JobController::class,'index']);
+//dkd,df
