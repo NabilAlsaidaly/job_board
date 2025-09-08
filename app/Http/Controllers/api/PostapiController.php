@@ -1,27 +1,23 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\api;
 
+use App\Http\Controllers\Controller;
 use App\Models\Post;
 use Illuminate\Http\Request;
 
-class PostController extends Controller
+class PostapiController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $data=Post::cursorPaginate(5);
-        return view('post.index',['posts'=>$data,"Pagetitle"=>'Blog']);
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
+        $data = Post::get();
+        if ($data->isEmpty()) {
+            return response(['message' => 'No posts found'], 404);
+        }
+        return response($data, 200);
     }
 
     /**
@@ -36,14 +32,6 @@ class PostController extends Controller
      * Display the specified resource.
      */
     public function show(string $id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
     {
         //
     }
